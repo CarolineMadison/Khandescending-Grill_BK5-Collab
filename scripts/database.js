@@ -32,5 +32,77 @@ const database = {
     { id: 1, size: "Bucket" },
     { id: 2, size: "Bread box" },
     { id: 3, size: "Rubbish Bin" }
-  ]
+  ],
+  orders: [
+    {
+      id: 1,
+      proteinId: 1,
+      vegetableId: 1,
+      carbId: 1,
+      sauceId: 3,
+      seasoningId: 4,
+      bowlSizeId: 3
+    }
+  ],
+  choices: {},
 };
+
+export const getProteins = () => {
+  return database.proteins.map(protein => ({ ...protein }))
+}
+
+export const getVegetables = () => {
+  return database.vegetables.map(vegetable => ({ ...vegetable }))
+}
+
+export const getCarbs = () => {
+  return database.carbs.map(carb => ({ ...carb }))
+}
+
+export const getSauces = () => {
+  return database.sauces.map(sauce => ({ ...sauce }))
+}
+
+export const getSeasonings = () => {
+  return database.seasonings.map(seasoning => ({ ...seasoning }))
+}
+
+export const getBowlSizes = () => {
+  return database.bowlSizes.map(size => ({ ...size }))
+}
+
+export const setProteins = (id) => {
+  database.choices.proteinId = id
+}
+export const setVegetables = (id) => {
+  database.choices.vegetableId = id
+}
+export const setCarbs = (id) => {
+  database.choices.carbId = id
+}
+export const setSauces = (id) => {
+  database.choices.sauceId = id
+}
+export const setSeasonings = (id) => {
+  database.choices.seasoningId = id
+}
+export const setBowlSizes = (id) => {
+  database.choices.bowlSizeId = id
+}
+
+export const getOrders = () => {
+  return database.orders.map(order => ({...order}))
+}
+
+export const createOrder = () => {
+  const newOrder = {...database.choices}
+
+  const lastIndex = database.orders.length - 1
+  newOrder.id = database.orders[lastIndex].id + 1
+
+  database.orders.push(newOrder)
+  console.log(newOrder)
+
+  database.choices = {}
+
+  document.dispatchEvent(new CustomEvent("stateChanged"))}
